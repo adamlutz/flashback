@@ -1,14 +1,19 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import CardContext from '../context/cardContext'
 
 const IndexScreen = () => {
-  const value = useContext(CardContext);
+  const cards = useContext(CardContext);
 
   return (
     <View style={styles.container}>
-      <Text>Here2</Text>
-      <Text>{value}</Text>
+        <FlatList
+          data={cards}
+          keyExtractor={(card) => card.question}
+          renderItem={({ item }) => {
+            return <Text>{item.question}</Text>
+          }}
+        />
     </View>
   )
 }

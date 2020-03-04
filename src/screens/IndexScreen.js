@@ -4,7 +4,7 @@ import { Context as CardContext } from '../context/CardContext'
 import { Feather } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const IndexScreen = () => {
+const IndexScreen = ({ navigation }) => {
   const { state, addCard, rmCard } = useContext(CardContext);
 
   return (
@@ -14,12 +14,16 @@ const IndexScreen = () => {
         data={state}
         keyExtractor={(card) => card.title}
         renderItem={({ item }) => {
-          return <View style={styles.row}>
-            <Text style={styles.title}>{item.title}</Text>
-            <TouchableOpacity onPress={() => { rmCard(item.id) }}>
-              <Feather style={styles.icon} name='trash' />
+          return (
+            <TouchableOpacity onPress={() => navigation.navigate('Show', { id: item.id })}>
+              <View style={styles.row}>
+                <Text style={styles.title}>{item.title}</Text>
+                <TouchableOpacity onPress={() => { rmCard(item.id) }}>
+                  <Feather style={styles.icon} name='trash' />
+                </TouchableOpacity>
+              </View>
             </TouchableOpacity>
-          </View>
+          )
         }}
       />
     </View>

@@ -18,7 +18,11 @@ const CreateScreen = ({ navigation }) => {
       <TextInput style={styles.input} value={answer} onChangeText={(text) => setAnswer(text)} />
       <Button
         title='Add Card'
-        onPress={() => addCard(question, answer)}
+        onPress={() => {
+          addCard(question, answer)
+          navigation.navigate('Index');
+        }
+        }
       />
     </View>
   )

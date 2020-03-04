@@ -1,6 +1,4 @@
-import React, { useReducer } from 'react';
-
-const CardContext = React.createContext();
+import createDataContext from './createDataContext';
 
 const cardReducer = (state, action) => {
   switch (action.type) {
@@ -11,23 +9,15 @@ const cardReducer = (state, action) => {
   }
 }
 
+// rather than creating multiple methods for each crud
+// operation, use reducers instead!
+const addCard = (dispatch) => {
+  return () => {
+    dispatch({ type: 'add_card' })
+  }
+};
 
-// this is a named export
-// chilcren is basically 'App'
-export const CardProvider = ({ children }) => {
 
-  // cards == state
-  const [cards, dispatch] = useReducer(cardReducer, []);
-
-  // rather than creating multiple methods for each crud
-  // operation, use reducers instead!
-  const addCard = () => {
-    dispatch({ type: 'add_card', payload: 'title' })
-  };
-
-  return <CardContext.Provider value={{ data: cards, addCard }}>
-    {children}
-  </CardContext.Provider>;
-}
-
-export default CardContext;
+// Provider is react component that makes data available to rest of app
+// or other components
+export const { Context, Provider } = createDataContext(cardReducer, { addCard }, []);

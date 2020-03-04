@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
 import { Button, View, Text, StyleSheet, FlatList } from 'react-native';
-import CardContext from '../context/cardContext'
+import { Context as CardContext } from '../context/CardContext'
 
 const IndexScreen = () => {
-  const { data, addCard } = useContext(CardContext);
+  const { state, addCard } = useContext(CardContext);
 
   return (
     <View style={styles.container}>
       <Button title='Add card' onPress={addCard} />
       <FlatList
-        data={data}
+        data={state}
         keyExtractor={(card) => card.title}
         renderItem={({ item }) => {
           return <Text>{item.title}</Text>

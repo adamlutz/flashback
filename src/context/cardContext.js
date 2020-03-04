@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const CardContext = React.createContext();
 
@@ -6,12 +6,12 @@ const CardContext = React.createContext();
 // chilcren is basically 'App'
 export const CardProvider = ({ children }) => {
 
-  const cards = [
-    { question: 'test', answer: 'test' },
-    { question: 'test2', answer: 'test' }
-  ];
+  const [cards, setCards] = useState([]);
+  const addCard = () => {
+    setCards([...cards, { title: `my card # ${cards.length + 1}` }]);
+  };
 
-  return <CardContext.Provider value={cards}>
+  return <CardContext.Provider value={{ data: cards, addCard }}>
     {children}
   </CardContext.Provider>;
 }

@@ -9,15 +9,14 @@ const IndexScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Button title='Add card' onPress={addCard} />
       <FlatList
         data={state}
-        keyExtractor={(card) => card.title}
+        keyExtractor={(card) => `${card.id}`}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity onPress={() => navigation.navigate('Show', { id: item.id })}>
               <View style={styles.row}>
-                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.title}>{item.question}</Text>
                 <TouchableOpacity onPress={() => { rmCard(item.id) }}>
                   <Feather style={styles.icon} name='trash' />
                 </TouchableOpacity>
@@ -32,12 +31,11 @@ const IndexScreen = ({ navigation }) => {
 
 IndexScreen.navigationOptions = ({ navigation }) => {
   return {
-    headerRight: () => {
-      <TouchableOpacity onPress={() => { navigation.navigate('Create') }}>
-        <Feather style={styles.plus} name='plus' size={30} />
+    headerRight: () =>
+      <TouchableOpacity style={styles.icon} onPress={() => { navigation.navigate('Create') }}>
+        <Feather name='plus' size={30} />
       </TouchableOpacity>
-    }
-  };
+  }
 };
 
 const styles = StyleSheet.create({
@@ -57,7 +55,7 @@ const styles = StyleSheet.create({
   },
   plus: {
     marginRight: 20
-  },
-})
+  }
+});
 
 export default IndexScreen;

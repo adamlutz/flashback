@@ -5,7 +5,7 @@ const cardReducer = (state, action) => {
     case 'add_card':
       return [...state, {
         id: Math.floor(Math.random() * 999),
-        title: `my card # ${state.length + 1}`
+        ...action.payload
       }]
     case 'rm_card':
       return state.filter((card) => card.id !== action.payload)
@@ -17,8 +17,8 @@ const cardReducer = (state, action) => {
 // rather than creating multiple methods for each crud
 // operation, use reducers instead!
 const addCard = (dispatch) => {
-  return () => {
-    dispatch({ type: 'add_card' })
+  return (question, answer) => {
+    dispatch({ type: 'add_card', payload: { question, answer } })
   }
 };
 

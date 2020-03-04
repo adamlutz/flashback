@@ -17,5 +17,5 @@ const App = createAppContainer(navigator);
 export default () => {
   return <CardProvider>
     <App />
-    </CardProvider>;
+  </CardProvider>;
 };

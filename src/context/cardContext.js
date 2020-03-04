@@ -7,8 +7,8 @@ const CardContext = React.createContext();
 export const CardProvider = ({ children }) => {
 
   const cards = [
-    { question: 'test', answer: 'test'},
-    { question: 'test2', answer: 'test'}
+    { question: 'test', answer: 'test' },
+    { question: 'test2', answer: 'test' }
   ];
 
   return <CardContext.Provider value={cards}>

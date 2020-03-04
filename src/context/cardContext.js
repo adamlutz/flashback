@@ -3,7 +3,12 @@ import createDataContext from './createDataContext';
 const cardReducer = (state, action) => {
   switch (action.type) {
     case 'add_card':
-      return [...state, { title: `my card # ${state.length + 1}` }]
+      return [...state, {
+        id: Math.floor(Math.random() * 999),
+        title: `my card # ${state.length + 1}`
+      }]
+    case 'rm_card':
+      return state.filter((card) => card.id !== action.payload)
     default:
       return state;
   }
@@ -17,7 +22,13 @@ const addCard = (dispatch) => {
   }
 };
 
+const rmCard = (dispatch) => {
+  return (id) => {
+    dispatch({ type: 'rm_card', payload: id })
+  }
+};
+
 
 // Provider is react component that makes data available to rest of app
 // or other components
-export const { Context, Provider } = createDataContext(cardReducer, { addCard }, []);
+export const { Context, Provider } = createDataContext(cardReducer, { addCard, rmCard }, []);

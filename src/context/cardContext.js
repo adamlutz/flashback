@@ -5,8 +5,16 @@ const cardReducer = (state, action) => {
     case 'add_card':
       return [...state, {
         id: Math.floor(Math.random() * 999),
-        ...action.payload
+        question: action.payload.question,
+        answer: action.payload.answer,
       }]
+    case 'edit_card':
+      return state.map((card) => {
+        if (card.id === action.payload.id) {
+          return action.payload
+        }
+        return card;
+      });
     case 'rm_card':
       return state.filter((card) => card.id !== action.payload)
     default:
@@ -22,6 +30,13 @@ const addCard = (dispatch) => {
   }
 };
 
+const editCard = (dispatch) => {
+  return (id, question, answer) => {
+    dispatch({ type: 'edit_card', payload: { id, question, answer } })
+  }
+};
+
+
 const rmCard = (dispatch) => {
   return (id) => {
     dispatch({ type: 'rm_card', payload: id })
@@ -31,4 +46,4 @@ const rmCard = (dispatch) => {
 
 // Provider is react component that makes data available to rest of app
 // or other components
-export const { Context, Provider } = createDataContext(cardReducer, { addCard, rmCard }, []);
+export const { Context, Provider } = createDataContext(cardReducer, { addCard, editCard, rmCard }, []);

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { TouchableOpacity, View, Text, StyleSheet, FlatList } from 'react-native';
+import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 import { Context as CardContext } from '../context/CardContext';
 import { EvilIcons } from '@expo/vector-icons';
 
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 ShowScreen.navigationOptions = ({ navigation }) => {
   return {
     headerRight: () =>
-      <TouchableOpacity style={styles.icon} onPress={() => { navigation.navigate('Edit') }}>
+      <TouchableOpacity style={styles.icon} onPress={() => { navigation.navigate('Edit', { id: navigation.getParam('id') }) }}>
         <EvilIcons name='pencil' size={30} />
       </TouchableOpacity>
   }

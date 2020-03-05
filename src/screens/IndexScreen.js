@@ -4,8 +4,8 @@ import { Context as CardContext } from '../context/CardContext'
 import { Feather } from '@expo/vector-icons';
 
 const IndexScreen = ({ navigation }) => {
-  const { state, addCard, rmCard } = useContext(CardContext);
-
+  const { state, rmCard } = useContext(CardContext);
+  console.log(state)
   return (
     <View>
       <FlatList
@@ -24,7 +24,7 @@ const IndexScreen = ({ navigation }) => {
           )
         }}
       />
-    </View>
+    </View >
   )
 }
 

@@ -1,5 +1,7 @@
 import createDataContext from './createDataContext';
 
+import jsonServer from '../api/jsonServer';
+
 const cardReducer = (state, action) => {
   switch (action.type) {
     case 'add_card':
@@ -17,8 +19,17 @@ const cardReducer = (state, action) => {
       });
     case 'rm_card':
       return state.filter((card) => card.id !== action.payload)
+    case 'get_cards':
+      return action.payload;
     default:
       return state;
+  }
+}
+
+const getCards = (dispatch) => {
+  return async () => {
+    const response = await jsonServer.get('/cards');
+    dispatch({ type: 'get_cards', payload: response.data })
   }
 }
 
@@ -46,4 +57,4 @@ const rmCard = (dispatch) => {
 
 // Provider is react component that makes data available to rest of app
 // or other components
-export const { Context, Provider } = createDataContext(cardReducer, { addCard, editCard, rmCard }, []);
+export const { Context, Provider } = createDataContext(cardReducer, { addCard, editCard, rmCard, getCards }, []);

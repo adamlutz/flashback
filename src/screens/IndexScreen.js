@@ -1,10 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { TouchableOpacity, View, Text, StyleSheet, FlatList } from 'react-native';
 import { Context as CardContext } from '../context/CardContext'
 import { Feather } from '@expo/vector-icons';
 
 const IndexScreen = ({ navigation }) => {
-  const { state, rmCard } = useContext(CardContext);
+  const { state, rmCard, getCards } = useContext(CardContext);
+
+  // one time result
+  useEffect(() => {
+    getCards();
+  }, [])
 
   return (
     <View>
@@ -27,6 +32,7 @@ const IndexScreen = ({ navigation }) => {
     </View >
   )
 }
+
 
 IndexScreen.navigationOptions = ({ navigation }) => {
   return {

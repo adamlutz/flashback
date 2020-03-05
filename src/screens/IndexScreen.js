@@ -9,6 +9,16 @@ const IndexScreen = ({ navigation }) => {
   // one time result
   useEffect(() => {
     getCards();
+
+    // fetch again, if return focus to screen
+    const listener = navigation.addListener('didFocus', () => {
+      getCards();
+    });
+
+    // returning a function will run when component is destroyed/no longer visible
+    return () => {
+      listener.remove();
+    }
   }, [])
 
   return (

@@ -4,12 +4,6 @@ import jsonServer from '../api/jsonServer';
 
 const cardReducer = (state, action) => {
   switch (action.type) {
-    case 'add_card':
-      return [...state, {
-        id: Math.floor(Math.random() * 999),
-        question: action.payload.question,
-        answer: action.payload.answer,
-      }]
     case 'edit_card':
       return state.map((card) => {
         if (card.id === action.payload.id) {
@@ -36,8 +30,8 @@ const getCards = (dispatch) => {
 // rather than creating multiple methods for each crud
 // operation, use reducers instead!
 const addCard = (dispatch) => {
-  return (question, answer) => {
-    dispatch({ type: 'add_card', payload: { question, answer } })
+  return async (question, answer) => {
+    await jsonServer.post('/cards', { question, answer })
   }
 };
 
@@ -49,7 +43,10 @@ const editCard = (dispatch) => {
 
 
 const rmCard = (dispatch) => {
-  return (id) => {
+  return async (id) => {
+    await jsonServer.delete(`/cards/${id}`)
+
+    // could optionally refresh from the API here, or do it locally
     dispatch({ type: 'rm_card', payload: id })
   }
 };

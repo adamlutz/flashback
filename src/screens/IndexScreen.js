@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
-import { Button, View, Text, StyleSheet, FlatList } from 'react-native';
+import { TouchableOpacity, View, Text, StyleSheet, FlatList } from 'react-native';
 import { Context as CardContext } from '../context/CardContext'
 import { Feather } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const IndexScreen = ({ navigation }) => {
   const { state, addCard, rmCard } = useContext(CardContext);

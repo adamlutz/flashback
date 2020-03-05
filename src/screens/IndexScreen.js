@@ -5,7 +5,7 @@ import { Feather } from '@expo/vector-icons';
 
 const IndexScreen = ({ navigation }) => {
   const { state, rmCard } = useContext(CardContext);
-  console.log(state)
+
   return (
     <View>
       <FlatList

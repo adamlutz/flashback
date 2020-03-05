@@ -11,7 +11,7 @@ const EditScreen = ({ navigation }) => {
   return (
     <CardForm initialValues={{ question: card.question, answer: card.answer }} callback={(question, answer) => {
       editCard(id, question, answer);
-      navigation.navigate('Index');
+      navigation.pop();
     }} />
   )
 }

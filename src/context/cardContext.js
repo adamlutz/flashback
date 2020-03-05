@@ -36,8 +36,10 @@ const addCard = (dispatch) => {
 };
 
 const editCard = (dispatch) => {
-  return (id, question, answer) => {
+  return async (id, question, answer, callback) => {
+    await jsonServer.put(`/cards/${id}`, { question, answer });
     dispatch({ type: 'edit_card', payload: { id, question, answer } })
+    callback();
   }
 };
 
